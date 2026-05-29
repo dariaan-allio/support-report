@@ -24,6 +24,7 @@
     .card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px; margin-bottom: 14px; background: #fff; }
     .card canvas { width: 100% !important; height: 210px !important; max-height: 210px; }
     #problemStages { height: 320px !important; max-height: 320px; }
+    #problemDur { height: 280px !important; max-height: 280px; }
     .small { color: #6b7280; font-size: 12px; margin-top: 8px; }
     .template-list { margin: 0 0 12px 18px; }
     .template-list li { margin-bottom: 4px; }
@@ -52,7 +53,7 @@
         </li>
       </ul>
       <canvas id="types"></canvas>
-      <div class="small">Источник: файл "Динамика обращений по типам.csv". Ось X: месяцы. Ось Y: количество обращений. Легенда: тип обращения.</div>
+      <div class="small">Источник: файл "Динамика обращений по типам.csv". Ось X: месяцы. Ось Y: количество обращений. Легенда: тип обращения и общее количество за месяц.</div>
     </div>
   </div>
 
@@ -139,24 +140,6 @@
       <h4>Поступившие пожелания по приоритетам застройщика</h4>
       <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-390">YouTrack 150-390</a>
       <canvas id="wishesPriority"></canvas>
-      <div class="table-wrap">
-        <table>
-          <tr><th>Месяц</th><th>Количество обращений A</th><th>Количество обращений B</th><th>Количество обращений C</th><th>Без указанного приоритета</th></tr>
-          <tr><td>2025-05</td><td>12</td><td>15</td><td>7</td><td>4</td></tr>
-          <tr><td>2025-06</td><td>9</td><td>17</td><td>6</td><td>11</td></tr>
-          <tr><td>2025-07</td><td>17</td><td>14</td><td>12</td><td>2</td></tr>
-          <tr><td>2025-08</td><td>9</td><td>11</td><td>6</td><td>4</td></tr>
-          <tr><td>2025-09</td><td>8</td><td>3</td><td>3</td><td>7</td></tr>
-          <tr><td>2025-10</td><td>9</td><td>5</td><td>7</td><td>11</td></tr>
-          <tr><td>2025-11</td><td>15</td><td>11</td><td>5</td><td>10</td></tr>
-          <tr><td>2025-12</td><td>14</td><td>18</td><td>10</td><td>2</td></tr>
-          <tr><td>2026-01</td><td>14</td><td>6</td><td>3</td><td>1</td></tr>
-          <tr><td>2026-02</td><td>19</td><td>8</td><td>6</td><td>2</td></tr>
-          <tr><td>2026-03</td><td>22</td><td>18</td><td>2</td><td>3</td></tr>
-          <tr><td>2026-04</td><td>33</td><td>13</td><td>8</td><td>4</td></tr>
-          <tr><td>2026-05</td><td>10</td><td>6</td><td>0</td><td>4</td></tr>
-        </table>
-      </div>
     </div>
 
     <div class="row-2">
@@ -164,43 +147,11 @@
         <h4>Соотношение количества поступивших и закрытых пожеланий</h4>
         <div class="small">Данные из списка отчета: <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-390">YouTrack 150-390</a>. Создано — месяц поля «Создана»; закрыто — месяц поля «Завершенная» (только пожелания с датой завершения).</div>
         <canvas id="wishesCreatedClosed"></canvas>
-        <table>
-          <tr><th>Месяц</th><th>Создано</th><th>Закрыто</th></tr>
-          <tr><td>2025-05</td><td>38</td><td>0</td></tr>
-          <tr><td>2025-06</td><td>43</td><td>2</td></tr>
-          <tr><td>2025-07</td><td>46</td><td>5</td></tr>
-          <tr><td>2025-08</td><td>29</td><td>5</td></tr>
-          <tr><td>2025-09</td><td>21</td><td>4</td></tr>
-          <tr><td>2025-10</td><td>32</td><td>5</td></tr>
-          <tr><td>2025-11</td><td>41</td><td>14</td></tr>
-          <tr><td>2025-12</td><td>44</td><td>3</td></tr>
-          <tr><td>2026-01</td><td>24</td><td>3</td></tr>
-          <tr><td>2026-02</td><td>35</td><td>12</td></tr>
-          <tr><td>2026-03</td><td>45</td><td>19</td></tr>
-          <tr><td>2026-04</td><td>58</td><td>16</td></tr>
-          <tr><td>2026-05</td><td>20</td><td>8</td></tr>
-        </table>
       </div>
       <div class="card">
         <h4>Соотношение поступивших и закрытых обращений приоритета A</h4>
         <div class="small">Данные из списка отчета: <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-390">YouTrack 150-390</a>. Приоритет застройщика A. Создано — месяц «Создана»; закрыто — месяц «Завершенная».</div>
         <canvas id="wishesA"></canvas>
-        <table>
-          <tr><th>Месяц</th><th>Создано A</th><th>Закрыто A</th></tr>
-          <tr><td>2025-05</td><td>12</td><td>0</td></tr>
-          <tr><td>2025-06</td><td>9</td><td>0</td></tr>
-          <tr><td>2025-07</td><td>17</td><td>0</td></tr>
-          <tr><td>2025-08</td><td>9</td><td>0</td></tr>
-          <tr><td>2025-09</td><td>8</td><td>0</td></tr>
-          <tr><td>2025-10</td><td>9</td><td>1</td></tr>
-          <tr><td>2025-11</td><td>15</td><td>2</td></tr>
-          <tr><td>2025-12</td><td>14</td><td>0</td></tr>
-          <tr><td>2026-01</td><td>14</td><td>1</td></tr>
-          <tr><td>2026-02</td><td>19</td><td>4</td></tr>
-          <tr><td>2026-03</td><td>22</td><td>12</td></tr>
-          <tr><td>2026-04</td><td>33</td><td>9</td></tr>
-          <tr><td>2026-05</td><td>10</td><td>5</td></tr>
-        </table>
       </div>
     </div>
 
@@ -214,22 +165,6 @@
         <h4>Время решения закрытых пожеланий по группам длительности в разрезе месяцев</h4>
         <div class="small">Расчет выполнен по формуле: дата из поля «Завершенная» минус дата из поля «Создана».</div>
         <canvas id="wishDur"></canvas>
-        <table>
-          <tr><th>Месяц</th><th>до 30 дней</th><th>от 30 до 180 дней</th><th>от 180 до 360</th><th>от 360 до 720</th><th>Более 720</th></tr>
-          <tr><td>2025-05</td><td>3</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2025-06</td><td>37</td><td>5</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2025-07</td><td>53</td><td>17</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2025-08</td><td>40</td><td>10</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2025-09</td><td>26</td><td>8</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2025-10</td><td>17</td><td>12</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2025-11</td><td>20</td><td>3</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2025-12</td><td>14</td><td>3</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2026-01</td><td>8</td><td>5</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2026-02</td><td>27</td><td>15</td><td>2</td><td>0</td><td>0</td></tr>
-          <tr><td>2026-03</td><td>31</td><td>21</td><td>2</td><td>0</td><td>0</td></tr>
-          <tr><td>2026-04</td><td>31</td><td>13</td><td>1</td><td>0</td><td>0</td></tr>
-          <tr><td>2026-05</td><td>20</td><td>13</td><td>3</td><td>0</td><td>0</td></tr>
-        </table>
       </div>
     </div>
   </div>
@@ -293,7 +228,7 @@
 
   <script>
     const common = { responsive: true, maintainAspectRatio: false };
-    new Chart(document.getElementById('types'), { type: 'bar', data: { labels: ['2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05'], datasets: [{ label: 'Вопрос', data: [57,50,87,77,90,101,111,110,91,80,131,142,106], backgroundColor: '#60a5fa' }, { label: 'Пожелание', data: [38,43,56,29,21,32,41,44,24,35,45,58,20], backgroundColor: '#34d399' }, { label: 'Проблема', data: [30,53,44,27,22,32,28,29,24,49,36,41,30], backgroundColor: '#f59e0b' }] }, options: { ...common, scales: { x: { stacked: false }, y: { stacked: false } } } });
+    new Chart(document.getElementById('types'), { type: 'bar', data: { labels: ['2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05'], datasets: [{ label: 'Вопрос', data: [57,50,87,77,90,101,111,110,91,80,131,142,106], backgroundColor: '#60a5fa' }, { label: 'Пожелание', data: [38,43,56,29,21,32,41,44,24,35,45,58,20], backgroundColor: '#34d399' }, { label: 'Проблема', data: [30,53,44,27,22,32,28,29,24,49,36,41,30], backgroundColor: '#f59e0b' }, { label: 'Общее количество обращений', data: [125,146,187,133,133,165,180,183,139,164,212,241,156], backgroundColor: '#6366f1' }] }, options: { ...common, scales: { x: { stacked: false }, y: { stacked: false } } } });
     new Chart(document.getElementById('problemStages'), {
       type: 'bar',
       data: {
@@ -327,7 +262,7 @@
           { label: 'Более 30 дней', data: [0,4,23,17,9,7,13,2,3,5,12,19,9,15], backgroundColor: '#ef4444' }
         ]
       },
-      options: { ...common, scales: { x: { stacked: true }, y: { stacked: true } } }
+      options: { ...common, scales: { x: { stacked: false }, y: { stacked: false } } }
     });
     new Chart(document.getElementById('wishesPriority'), { type: 'bar', data: { labels: ['2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05'], datasets: [{ label: 'A', data: [12,9,17,9,8,9,15,14,14,19,22,33,10], backgroundColor: '#2563eb' }, { label: 'B', data: [15,17,14,11,3,5,11,18,6,8,18,13,6], backgroundColor: '#16a34a' }, { label: 'C', data: [7,6,12,6,3,7,5,10,3,6,2,8,0], backgroundColor: '#f59e0b' }, { label: 'Без приоритета', data: [4,11,2,4,7,11,10,2,1,2,3,4,4], backgroundColor: '#9ca3af' }] }, options: { ...common, scales: { x: { stacked: true }, y: { stacked: true } } } });
     new Chart(document.getElementById('wishesCreatedClosed'), { type: 'bar', data: { labels: ['2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05'], datasets: [{ label: 'Создано', data: [38,43,46,29,21,32,41,44,24,35,45,58,20], backgroundColor: '#60a5fa' }, { label: 'Закрыто', data: [0,2,5,5,4,5,14,3,3,12,19,16,8], backgroundColor: '#34d399' }] }, options: common });
