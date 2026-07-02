@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Отчет техподдержки — июнь 2026 (итоговый)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; color: #1f2937; line-height: 1.45; font-size: 17px; }
+    h1, h2, h3, h4 { margin: 0 0 10px; }
+    h2, h3 {
+      display: block;
+      width: 100%;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      font-size: 1.08em;
+    }
+    .section { margin-top: 28px; }
+    .meta { color: #6b7280; margin: 4px 0 14px; }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px; margin-bottom: 14px; background: #fff; }
+    .card canvas { width: 100% !important; height: 210px !important; max-height: 210px; }
+    #problemStages { height: 320px !important; max-height: 320px; }
+    #problemDur { height: 280px !important; max-height: 280px; }
+    .small { color: #6b7280; font-size: 12px; margin-top: 8px; }
+    .template-list { margin: 0 0 12px 18px; }
+    .template-list li { margin-bottom: 4px; }
+    .link { color: #2563eb; text-decoration: none; }
+    .link:hover { text-decoration: underline; }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; margin-top: 8px; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px; text-align: left; }
+    th { background: #f3f4f6; }
+    .hr { border-top: 1px solid #e5e7eb; margin: 18px 0; }
+    .mini-table { max-width: 360px; }
+  </style>
+</head>
+<body>
+  <h1>Ежемесячный отчет по техподдержке</h1>
+  <div class="meta">Только внешние обращения (исключены ALLIO Dev и ALLIO Demo).</div>
+
+
+  <div class="section">
+    <h3>Общая динамика обращений по типам (только внешние)</h3>
+    <div class="card">
+      <ul class="template-list">
+        <li>
+          Ссылка на отчет:
+          <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-379">YouTrack 150-379</a>
+        </li>
+      </ul>
+      <canvas id="types"></canvas>
+      <div class="small">Источник: файл "Динамика обращений по типам.csv". Ось X: месяцы. Ось Y: количество обращений. Легенда: тип обращения и общее количество за месяц.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Причина обращений</h3>
+    <div>
+      <div class="card">
+        <h4>Круговая диаграмма L0/L1/L2 по всем типам обращений</h4>
+        <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-299">YouTrack 150-299</a>
+        <canvas id="levels"></canvas>
+      </div>
+      <div class="card">
+        <h4>Таблица/гистограмма причин обращений по вопросам</h4>
+        <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-376?presentation=MATRIX">YouTrack 150-376 (MATRIX)</a>
+        <div class="row-2">
+          <div>
+            <div class="small">Май 2026: доля L0/L1/L2, %</div>
+            <canvas id="reasonTypesAprPie"></canvas>
+          </div>
+          <div>
+            <div class="small">Июнь 2026: доля L0/L1/L2, %</div>
+            <canvas id="reasonTypesMayPie"></canvas>
+          </div>
+        </div>
+        <table>
+          <tr><th>Причина</th><th>2026-05</th><th>2026-06</th></tr>
+          <tr><td>L1: ошибка юзера</td><td>11.6%</td><td>5.4%</td></tr>
+          <tr><td>L1: недостаток обучения</td><td>12.5%</td><td>23.4%</td></tr>
+          <tr><td>L2: ошибка системы</td><td>12.5%</td><td>7.2%</td></tr>
+          <tr><td>L1: не по функционалу</td><td>11.6%</td><td>9.9%</td></tr>
+          <tr><td>L0: ответила бы Лилу</td><td>9.8%</td><td>10.8%</td></tr>
+          <tr><td>L1: нет функциональности (проблема)</td><td>12.5%</td><td>9%</td></tr>
+          <tr><td>L1: неверно трактует функционал</td><td>9.8%</td><td>1.8%</td></tr>
+          <tr><td>L2: не детализировано в справке</td><td>8%</td><td>11.7%</td></tr>
+          <tr><td>L1: разобрались сами</td><td>5.4%</td><td>9.9%</td></tr>
+          <tr><td>L1: классическое пожелание</td><td>3.6%</td><td>0.9%</td></tr>
+          <tr><td>L1: недостаток юзабилити</td><td>2.7%</td><td>9.9%</td></tr>
+          <tr><td>Нет: причина обращения</td><td>0%</td><td>0%</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Аналитика проблем</h3>
+    <div>
+      <div class="card">
+        <h4>Стадия поступивших проблем в разрезе по месяцу поступления</h4>
+        <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-380">YouTrack 150-380</a>
+        <canvas id="problemStages"></canvas>
+        <div class="small">Источник: файл "Движение проблем.csv". Ось X: месяцы, легенда: статусы проблем.</div>
+      </div>
+      <div class="card">
+        <h4>Время решения закрытых проблем по группам длительности</h4>
+        <div class="meta">По оси Х разделение по дате завершения, то есть сколько проблем закрыто за конкретный месяц, по оси Y сколько ушло времени на закрытие проблем, которые закрыты в конктретном месяце.</div>
+        <div class="small">фильтр для YouTrack: Тип: Проблема застройщик: -{ALLIO Demo}, -{ALLIO Dev}, -Академия {дата фиксации}: 2025-04-01 .. 2026-06-01 {состояние проблемы}: {Сообщено клиенту}</div>
+        <canvas id="problemDur"></canvas>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Месяц</th><th>до 7 дней</th><th>от 8 до 14 дней</th><th>от 14 до 30</th><th>Более 30 дней</th><th>Всего закрытых проблем</th></tr>
+            <tr><td>2025-05</td><td>0%</td><td>100%</td><td>0%</td><td>0%</td><td>1</td></tr>
+            <tr><td>2025-06</td><td>25.7%</td><td>20%</td><td>40%</td><td>14.3%</td><td>35</td></tr>
+            <tr><td>2025-07</td><td>30.6%</td><td>18.4%</td><td>24.5%</td><td>26.5%</td><td>49</td></tr>
+            <tr><td>2025-08</td><td>19.2%</td><td>26.9%</td><td>26.9%</td><td>26.9%</td><td>26</td></tr>
+            <tr><td>2025-09</td><td>25%</td><td>35%</td><td>10%</td><td>30%</td><td>20</td></tr>
+            <tr><td>2025-10</td><td>15.4%</td><td>7.7%</td><td>30.8%</td><td>46.2%</td><td>26</td></tr>
+            <tr><td>2025-11</td><td>22.2%</td><td>22.2%</td><td>44.4%</td><td>11.1%</td><td>18</td></tr>
+            <tr><td>2025-12</td><td>29.4%</td><td>23.5%</td><td>29.4%</td><td>17.6%</td><td>17</td></tr>
+            <tr><td>2026-01</td><td>16.7%</td><td>8.3%</td><td>33.3%</td><td>41.7%</td><td>12</td></tr>
+            <tr><td>2026-02</td><td>33.3%</td><td>13.9%</td><td>19.4%</td><td>33.3%</td><td>36</td></tr>
+            <tr><td>2026-03</td><td>2.3%</td><td>11.6%</td><td>41.9%</td><td>44.2%</td><td>43</td></tr>
+            <tr><td>2026-04</td><td>23.1%</td><td>11.5%</td><td>30.8%</td><td>34.6%</td><td>26</td></tr>
+            <tr><td>2026-05</td><td>9.7%</td><td>16.1%</td><td>25.8%</td><td>48.4%</td><td>31</td></tr>
+            <tr><td>2026-06</td><td>33.3%</td><td>7.1%</td><td>21.4%</td><td>38.1%</td><td>42</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Аналитика пожеланий</h3>
+    <div class="card">
+      <h4>Поступившие пожелания по приоритетам застройщика</h4>
+      <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-390">YouTrack 150-390</a>
+      <canvas id="wishesPriority"></canvas>
+    </div>
+
+    <div class="row-2">
+      <div class="card">
+        <h4>Соотношение количества поступивших и закрытых пожеланий</h4>
+        <div class="small">Данные из списка отчета: <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-390">YouTrack 150-390</a>. Создано — месяц поля «Создана»; закрыто — месяц поля «Завершенная» (только пожелания с датой завершения).</div>
+        <canvas id="wishesCreatedClosed"></canvas>
+      </div>
+      <div class="card">
+        <h4>Соотношение поступивших и закрытых обращений приоритета A</h4>
+        <div class="small">Данные из списка отчета: <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-390">YouTrack 150-390</a>. Приоритет застройщика A. Создано — месяц «Создана»; закрыто — месяц «Завершенная».</div>
+        <canvas id="wishesA"></canvas>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h4>Стадия поступивших пожеланий в разрезе по месяцу поступления</h4>
+        <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-295">YouTrack 150-295</a>
+        <canvas id="wishStages"></canvas>
+      </div>
+      <div class="card">
+        <h4>Время решения закрытых пожеланий по группам длительности в разрезе месяцев</h4>
+        <div class="small">Расчет выполнен по формуле: дата из поля «Завершенная» минус дата из поля «Создана».</div>
+        <canvas id="wishDur"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>SLA</h3>
+    <div class="row-2">
+      <div class="card">
+        <h4>Время первого ответа</h4>
+        <div class="small">Источник: <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-332">YouTrack 150-332</a>. Проценты — по обращениям с известным временем первой реакции; столбец «?» — количество без указанного времени.</div>
+        <canvas id="sla1"></canvas>
+        <table>
+          <tr><th>Месяц</th><th>Меньше 15м</th><th>15м-1ч</th><th>1ч-1д</th><th>?</th></tr>
+          <tr><td>2026-06</td><td>93.4%</td><td>6.6%</td><td>0%</td><td>0</td></tr>
+          <tr><td>2026-05</td><td>92.8%</td><td>6%</td><td>1.2%</td><td>0</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h4>Общее время ответов / Время решения техподдержкой</h4>
+        <div class="small">Источник: <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-334">YouTrack 150-334</a>. Проценты — по обращениям с известным временем решения; столбец «?» — количество без указанного времени.</div>
+        <canvas id="sla2"></canvas>
+        <table>
+          <tr><th>Месяц</th><th>&lt;1ч</th><th>1ч-1д</th><th>1д-1н</th><th>&gt;1н</th><th>?</th></tr>
+          <tr><td>2026-06</td><td>46.2%</td><td>39.1%</td><td>14.2%</td><td>0.6%</td><td>13</td></tr>
+          <tr><td>2026-05</td><td>39.3%</td><td>35.2%</td><td>21.3%</td><td>4.1%</td><td>45</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>ОС пользователей</h3>
+    <div class="card">
+      <div class="row-2">
+        <div>
+          <div class="small">Данные из списка отчета: <a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-395">YouTrack 150-395</a>. Учитываются оценки 1 и 0; доля — от всех обращений за месяц (с оценкой и без).</div>
+          <canvas id="ratings"></canvas>
+        </div>
+        <div class="mini-table">
+          <table>
+            <tr><th>Месяц</th><th>Всего оценок</th><th>Полож.</th><th>Отриц.</th><th>% от обращений</th></tr>
+            <tr><td>2026-01</td><td>22</td><td>22</td><td>0</td><td>15.8%</td></tr>
+            <tr><td>2026-02</td><td>23</td><td>23</td><td>0</td><td>14%</td></tr>
+            <tr><td>2026-03</td><td>29</td><td>29</td><td>0</td><td>13.7%</td></tr>
+            <tr><td>2026-04</td><td>16</td><td>16</td><td>0</td><td>6.6%</td></tr>
+            <tr><td>2026-05</td><td>12</td><td>11</td><td>1</td><td>6.6%</td></tr>
+            <tr><td>2026-06</td><td>16</td><td>15</td><td>1</td><td>8.2%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Ссылки по метрикам</h3>
+    <ul class="template-list">
+      <li><a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-379">Общая динамика обращений</a></li>
+      <li><a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-376?presentation=MATRIX">Причины обращений (матрица)</a></li>
+      <li><a class="link" target="_blank" href="https://office.allio.ru/youtrack/reports/issueDistribution/150-380">Стадии проблем</a></li>
+    </ul>
+  </div>
+
+  <script>
+    const common = { responsive: true, maintainAspectRatio: false };
+    new Chart(document.getElementById('types'), { type: 'bar', data: { labels: ["2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"], datasets: [{ label: 'Вопрос', data: [50,87,77,90,101,111,110,91,80,131,142,108,104], backgroundColor: '#60a5fa' }, { label: 'Пожелание', data: [44,56,29,21,32,41,44,24,36,45,58,22,34], backgroundColor: '#34d399' }, { label: 'Проблема', data: [52,44,27,22,32,28,29,24,48,36,41,37,44], backgroundColor: '#f59e0b' }, { label: 'Общее количество обращений', data: [146,187,133,133,165,180,183,139,164,212,241,167,182], backgroundColor: '#6366f1' }] }, options: { ...common, scales: { x: { stacked: false }, y: { stacked: false } } } });
+    new Chart(document.getElementById('problemStages'), {
+      type: 'bar',
+      data: {
+        labels: ["2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],
+        datasets: [
+          { label: 'Сообщено клиенту', data: [49,43,25,15,24,26,25,20,38,25,29,22,21], backgroundColor: '#2563eb' },
+          { label: 'В очереди на разработку', data: [1,1,1,6,5,2,3,1,4,6,8,9,9], backgroundColor: '#16a34a' },
+          { label: 'В разработке', data: [1,0,0,0,1,0,1,2,0,1,1,0,4], backgroundColor: '#ef4444' },
+          { label: 'На проверке', data: [0,0,0,0,1,0,0,0,0,0,0,4,6], backgroundColor: '#f59e0b' },
+          { label: 'Рассматривает разработка', data: [0,0,0,0,1,0,0,1,4,3,1,0,1], backgroundColor: '#8b5cf6' },
+          { label: 'Ожидает ответ клиента', data: [0,0,0,1,0,0,0,0,1,1,2,2,2], backgroundColor: '#06b6d4' },
+          { label: 'Нет быстр решения', data: [0,0,1,0,0,0,0,0,1,0,0,0,0], backgroundColor: '#ec4899' },
+          { label: 'На паузе', data: [0,0,0,0,0,0,0,0,0,0,0,0,1], backgroundColor: '#6b7280' },
+          { label: 'Рассматривает аккаунт', data: [1,0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: '#84cc16' }
+        ]
+      },
+      options: { ...common, scales: { x: { stacked: true }, y: { stacked: true } } }
+    });
+    new Chart(document.getElementById('levels'), { type: 'pie', data: { labels: ['L0', 'L1', 'L2'], datasets: [{ data: [12,120,50], backgroundColor: ['#60a5fa', '#f59e0b', '#ef4444'] }] }, options: common });
+    new Chart(document.getElementById('reasonTypesAprPie'), { type: 'pie', data: { labels: ['L0', 'L1', 'L2'], datasets: [{ data: [9.8,69.6,20.5], backgroundColor: ['#60a5fa', '#f59e0b', '#ef4444'] }] }, options: common });
+    new Chart(document.getElementById('reasonTypesMayPie'), { type: 'pie', data: { labels: ['L0', 'L1', 'L2'], datasets: [{ data: [10.8,70.3,18.9], backgroundColor: ['#60a5fa', '#f59e0b', '#ef4444'] }] }, options: common });
+    new Chart(document.getElementById('problemDur'), {
+      type: 'bar',
+      data: {
+        labels: ["2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],
+        datasets: [
+          { label: 'до 7 дней', data: [0,9,15,5,5,4,4,5,2,12,1,6,3,14], backgroundColor: '#34d399' },
+          { label: 'от 8 до 14 дней', data: [1,7,9,7,7,2,4,4,1,5,5,3,5,3], backgroundColor: '#60a5fa' },
+          { label: 'от 14 до 30', data: [0,14,12,7,2,8,8,5,4,7,18,8,8,9], backgroundColor: '#f59e0b' },
+          { label: 'Более 30 дней', data: [0,5,13,7,6,12,2,3,5,12,19,9,15,16], backgroundColor: '#ef4444' }
+        ]
+      },
+      options: { ...common, scales: { x: { stacked: false }, y: { stacked: false } } }
+    });
+    new Chart(document.getElementById('wishesPriority'), { type: 'bar', data: { labels: ["2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"], datasets: [{ label: 'A', data: [9,18,10,10,9,15,14,14,19,22,35,10,8], backgroundColor: '#2563eb' }, { label: 'B', data: [18,13,10,3,6,11,18,6,9,18,12,8,18], backgroundColor: '#16a34a' }, { label: 'C', data: [6,12,6,3,7,5,10,3,6,2,7,1,2], backgroundColor: '#f59e0b' }, { label: 'Без приоритета', data: [11,2,4,5,10,10,2,1,2,3,4,3,6], backgroundColor: '#9ca3af' }] }, options: { ...common, scales: { x: { stacked: true }, y: { stacked: true } } } });
+    new Chart(document.getElementById('wishesCreatedClosed'), { type: 'bar', data: { labels: ["2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"], datasets: [{ label: 'Создано', data: [44,46,29,21,32,41,44,24,36,45,58,22,34], backgroundColor: '#60a5fa' }, { label: 'Закрыто', data: [0,5,3,4,5,14,3,3,10,18,17,10,17], backgroundColor: '#34d399' }] }, options: common });
+    new Chart(document.getElementById('wishesA'), { type: 'bar', data: { labels: ["2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"], datasets: [{ label: 'Создано A', data: [9,18,10,10,9,15,14,14,19,22,35,10,8], backgroundColor: '#1d4ed8' }, { label: 'Закрыто A', data: [0,0,0,0,1,2,0,1,3,12,9,7,10], backgroundColor: '#059669' }] }, options: common });
+    new Chart(document.getElementById('wishStages'), { type: 'bar', data: { labels: ["2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"], datasets: [{ label: 'Зафиксировано', data: [26,36,17,11,17,26,28,14,21,30,42,14,17], backgroundColor: '#60a5fa' }, { label: 'Сообщено клиенту', data: [15,10,11,8,14,9,14,5,15,8,4,1,1], backgroundColor: '#2563eb' }, { label: 'В очереди на разработку', data: [1,1,1,1,1,2,1,3,1,5,3,3,3], backgroundColor: '#16a34a' }, { label: 'Рассматривает разработка', data: [4,2,0,1,0,2,1,0,2,0,7,1,8], backgroundColor: '#8b5cf6' }, { label: 'Рассматривает аккаунт', data: [0,4,2,0,1,2,3,2,0,2,3,1,5], backgroundColor: '#f59e0b' }, { label: 'Открыта', data: [0,0,0,0,0,0,9,0,0,0,1,0,0], backgroundColor: '#84cc16' }, { label: 'Не делаем', data: [1,1,0,0,0,0,0,0,0,3,1,0,0], backgroundColor: '#a855f7' }, { label: 'В разработке', data: [0,0,0,0,0,0,0,2,0,1,2,1,1], backgroundColor: '#ef4444' }, { label: 'На проверке', data: [1,0,1,0,0,1,1,1,0,0,1,1,0], backgroundColor: '#ec4899' }, { label: 'Ожидает ответ клиента', data: [0,0,0,0,0,1,0,0,0,1,0,1,0], backgroundColor: '#06b6d4' }] }, options: { ...common, scales: { x: { stacked: true }, y: { stacked: true } } } });
+    new Chart(document.getElementById('wishDur'), { type: 'bar', data: { labels: ["2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"], datasets: [{ label: 'до 30 дней', data: [4,1,2,1,3,0,1,3,3,6,0,1], backgroundColor: '#34d399' }, { label: 'от 30 до 180 дней', data: [1,2,2,4,11,3,2,4,10,7,8,9], backgroundColor: '#60a5fa' }, { label: 'от 180 до 360', data: [0,0,0,0,0,0,0,2,5,2,2,7], backgroundColor: '#f59e0b' }, { label: 'от 360 до 720', data: [0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: '#a78bfa' }, { label: 'Более 720', data: [0,0,0,0,0,0,0,1,0,2,0,0], backgroundColor: '#ef4444' }] }, options: { ...common, scales: { x: { stacked: true }, y: { stacked: true } } } });
+    new Chart(document.getElementById('sla1'), { type: 'bar', data: { labels: ['2026-05', '2026-06'], datasets: [{ label: 'Меньше 15м', data: [92.8, 93.4], backgroundColor: '#34d399' }, { label: '15м-1ч', data: [6, 6.6], backgroundColor: '#60a5fa' }, { label: '1ч-1д', data: [1.2, 0], backgroundColor: '#f59e0b' }] }, options: { ...common, scales: { x: { stacked: true }, y: { stacked: true, max: 100 } } } });
+    new Chart(document.getElementById('sla2'), { type: 'bar', data: { labels: ['2026-05', '2026-06'], datasets: [{ label: '<1ч', data: [39.3, 46.2], backgroundColor: '#34d399' }, { label: '1ч-1д', data: [35.2, 39.1], backgroundColor: '#60a5fa' }, { label: '1д-1н', data: [21.3, 14.2], backgroundColor: '#f59e0b' }, { label: '>1н', data: [4.1, 0.6], backgroundColor: '#ef4444' }] }, options: { ...common, scales: { x: { stacked: true }, y: { stacked: true, max: 100 } } } });
+    new Chart(document.getElementById('ratings'), { type: 'bar', data: { labels: ["2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"], datasets: [{ label: 'Положительные, % от обращений', data: [15.8,14,13.7,6.6,6.6,8.2], backgroundColor: '#16a34a' }, { label: 'Отрицательные, % от обращений', data: [0,0,0,0,0.6,0.5], backgroundColor: '#ef4444' }] }, options: { ...common, scales: { y: { max: 18 } } } });
+  </script>
+</body>
+</html>
